@@ -1,0 +1,88 @@
+Problem Statement:
+
+Create an Application for Implementing Branching Statements and Looping Statements using Typescript.
+	Case 1: Check whether the given number is Even or Odd
+	Case 2: Display the Fibonacci series of the number
+	Case 3: Check whether the given number is strong or not
+	default: Enter Valid Number
+Hint: Accept the Input from HTML DOM
+
+index.HTML
+
+
+<!DOCTYPE html>
+<html>
+<body>
+    <h2>TS Math Operations</h2>
+    <input type="number" id="userInput" placeholder="Enter a number">
+    
+    <select id="caseType">
+        <option value="1">Case 1: Even Series (For Loop)</option>
+        <option value="2">Case 2: Fibonacci Series (While Loop)</option>
+        <option value="3">Case 3: Strong Number Check (Do-While)</option>
+    </select>
+
+    <button id="btn">Calculate</button>
+    <p id="display"></p>
+
+    <script src="case.js"></script>
+</body>
+</html>
+
+
+case.ts
+
+const btn = document.getElementById('btn') as HTMLButtonElement;
+
+btn.addEventListener('click', () => {
+    const num = parseInt((document.getElementById('userInput') as HTMLInputElement).value);
+    const caseValue = (document.getElementById('caseType') as HTMLSelectElement).value;
+    const display = document.getElementById('display') as HTMLElement;
+
+    if (isNaN(num)) {
+        display.innerText = "Please enter a valid number";
+        return;
+    }
+
+    switch (caseValue) {
+        case "1": // Even Series using FOR Loop
+            let evenSeries: number[] = [];
+            for (let i = 0; i <= num; i++) {
+                if (i % 2 === 0) evenSeries.push(i);
+            }
+            display.innerText = "Even Series: " + evenSeries.join(", ");
+            break;
+
+        case "2": // Fibonacci Series using WHILE Loop
+            let fSeries: number[] = [];
+            let a = 0, b = 1, next = 0;
+            while (a <= num) {
+                fSeries.push(a);
+                next = a + b;
+                a = b;
+                b = next;
+            }
+            display.innerText = "Fibonacci: " + fSeries.join(", ");
+            break;
+
+        case "3": // Strong Number using DO-WHILE Loop
+            let temp = num;
+            let totalSum = 0;
+            do {
+                let digit = temp % 10;
+                let fact = 1;
+                // Calculate factorial for each digit
+                for (let j = 1; j <= digit; j++) fact *= j;
+                totalSum += fact;
+                temp = Math.floor(temp / 10);
+            } while (temp > 0);
+
+            display.innerText = (totalSum === num) 
+                ? `${num} is a Strong Number` 
+                : `${num} is NOT a Strong Number`;
+            break;
+
+        default:
+            display.innerText = "Current Number: " + num;
+    }
+});
