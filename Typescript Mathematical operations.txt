@@ -1,4 +1,4 @@
-Problem Statement:
+Typescript Mathematical operations:
 
 Create an Application for Implementing Branching Statements and Looping Statements using Typescript.
 	Case 1: Check whether the given number is Even or Odd
@@ -86,3 +86,4 @@ btn.addEventListener('click', () => {
             display.innerText = "Current Number: " + num;
     }
 });
+
